@@ -14,6 +14,7 @@ import com.agregio.offer.businesslogic.gateways.repositories.ProductionParkRepos
 import com.agregio.offer.businesslogic.gateways.uuidgeneration.UuidGenerator;
 import com.agregio.offer.businesslogic.usecases.CreateMarketOffer;
 import com.agregio.offer.businesslogic.usecases.CreateProductionPark;
+import com.agregio.offer.businesslogic.usecases.GetGlobalMarketOffer;
 
 @Configuration
 @Profile("inmemory-e2e")
@@ -27,6 +28,11 @@ public class DependenciesConfigurationE2E {
 	@Bean
 	public CreateMarketOffer createMarketOffer(MarketOfferRepository marketOfferRepository, UuidGenerator uuidGenerator) {
 		return new CreateMarketOffer(marketOfferRepository, uuidGenerator);
+	}
+
+	@Bean
+	public GetGlobalMarketOffer getGlobalMarketOffer(MarketOfferRepository marketOfferRepository, ProductionParkRepository productionParkRepository) {
+		return new GetGlobalMarketOffer(marketOfferRepository, productionParkRepository);
 	}
 
 	@Bean

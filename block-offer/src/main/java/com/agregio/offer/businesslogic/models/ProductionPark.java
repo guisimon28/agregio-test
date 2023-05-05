@@ -33,6 +33,10 @@ public class ProductionPark {
 		return capacity;
 	}
 
+	public double getCapacityForRange(HourRange range) {
+		return capacity.stream().filter(c -> c.getHourRange().equals(range)).map(ProductionParkCapacityBlock::getCapacityInMwh).findFirst().orElse(0.0);
+	}
+
 	public static class Builder {
 		private UUID id;
 		private String name;

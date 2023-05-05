@@ -2,6 +2,7 @@ package com.agregio.offer.e2e;
 
 import static java.util.UUID.fromString;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -68,6 +69,11 @@ class MarketOfferControllerIT {
 						.withProductionParkIds(List.of(productionParkId))
 						.build()))
 				.build());
+	}
+
+	@Test
+	void shoud_have_no_content_when_no_market_offer_is_present() throws Exception {
+		mvc.perform(get("/market/offer/{type}", MarketType.PRIMARY).contentType("application/json")).andExpect(status().isNoContent());
 	}
 
 }

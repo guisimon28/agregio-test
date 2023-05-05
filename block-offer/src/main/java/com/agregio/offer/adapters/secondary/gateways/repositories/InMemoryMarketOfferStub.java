@@ -3,11 +3,11 @@ package com.agregio.offer.adapters.secondary.gateways.repositories;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import com.agregio.offer.businesslogic.gateways.repositories.MarketOfferRepository;
-import com.agregio.offer.businesslogic.gateways.repositories.ProductionParkRepository;
 import com.agregio.offer.businesslogic.models.MarketOffer;
-import com.agregio.offer.businesslogic.models.ProductionPark;
+import com.agregio.offer.businesslogic.models.MarketType;
 
 public class InMemoryMarketOfferStub implements MarketOfferRepository {
 
@@ -21,8 +21,12 @@ public class InMemoryMarketOfferStub implements MarketOfferRepository {
         return marketOffers;
     }
 
+    public Optional<MarketOffer> findByType(MarketType type){
+        return marketOffers.stream().filter(o -> o.getMarketType() == type).findFirst();
+    }
+
     // SECRET METHOD
-    public void setProductionParks(MarketOffer... marketOffers) {
+    public void setOffers(MarketOffer... marketOffers) {
         Collections.addAll(this.marketOffers, marketOffers);
     }
 }
