@@ -47,4 +47,21 @@ Je souhaite **lister les offres proposées sur un marché**
 
 De sorte à connaître la vente d'énergie sur chaque marché.
 
+## Réalisation
 
+### Pré requis
+
+Le projet a été réalisé en Java sous le jdk 17, il est donc necessaire de le lancer avec cette version.
+
+
+### Lancement de l'application
+
+Se placer dans le dossier block-offer et executer la commande suivante :
+
+```
+gradlew bootRun --args='--spring.profiles.active=inmemory'
+```
+
+### Accès aux apis
+
+Les différentes apis réalisées ont été documentées avec swagger. Vous pouvez y accéder une fois l'application lancée via ce lien : http://localhost:8080/swagger-ui/index.html
