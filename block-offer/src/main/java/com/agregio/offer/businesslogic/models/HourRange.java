@@ -3,6 +3,8 @@ package com.agregio.offer.businesslogic.models;
 import java.time.LocalTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class HourRange {
 
 	@JsonFormat(pattern = "HH:mm:ss")

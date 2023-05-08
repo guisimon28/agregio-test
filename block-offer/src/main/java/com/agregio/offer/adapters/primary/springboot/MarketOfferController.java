@@ -18,6 +18,10 @@ import com.agregio.offer.businesslogic.models.MarketType;
 import com.agregio.offer.businesslogic.usecases.CreateMarketOffer;
 import com.agregio.offer.businesslogic.usecases.GetGlobalMarketOffer;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Offre sur un marché")
 @RestController
 public class MarketOfferController {
 
@@ -30,12 +34,16 @@ public class MarketOfferController {
 		this.getGlobalMarketOffer = getGlobalMarketOffer;
 	}
 
+	@Operation(summary = "Créer une offre sur un marché",
+			description = "Pour placer une offre sur un marché, il est necessaire de choisir le type de marché et ensuite pour chaque bloc horaire le prix plancher et les parcs de productions choisis")
 	@PostMapping(path = "/market/offer/create")
 	public ResponseEntity<Void> createMarketOffer(@RequestBody CreateMarketOfferParams createMarketOfferParams) {
 		createMarketOffer.handle(createMarketOfferParams.type, convertToPriceBlock(createMarketOfferParams.priceBlocks));
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
+	@Operation(summary = "Récupérer les offres d'un marché",
+			description = "Lors de la récupération des offres sur un marché, on globalise les énergies proposés par blocs horaires pour tous les parcs de production")
 	@GetMapping(path = "/market/offer/{type}")
 	public ResponseEntity<GlobalMarketOffer> getGlobalMarketOffer(@PathVariable MarketType type) {
 		Optional<GlobalMarketOffer> globalMarketOffer = getGlobalMarketOffer.retrieve(type);
